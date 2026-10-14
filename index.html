@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>釜山 4 天 3 夜聖誕行程（12/24 ~ 12/27）</title>
+<style>
+  :root {
+    --ocean: #0f4c81;
+    --ocean-dark: #0a3357;
+    --sky: #e8f3fb;
+    --coral: #e8604c;
+    --gold: #f4b740;
+    --green: #2e8b6a;
+    --text: #22313f;
+    --muted: #5f7080;
+    --line: #dde6ee;
+    --bg: #f6f9fc;
+    --card: #ffffff;
+    --radius: 16px;
+    --shadow: 0 4px 18px rgba(15, 76, 129, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.75;
+    font-size: 17px;
+  }
+  a { color: var(--ocean); }
+
+  /* ---------- 頂部封面 ---------- */
+  .hero {
+    background: linear-gradient(135deg, var(--ocean-dark), var(--ocean) 60%, #2a7fc0);
+    color: #fff;
+    padding: 56px 20px 64px;
+    text-align: center;
+  }
+  .hero h1 { margin: 0 0 8px; font-size: clamp(28px, 6vw, 44px); letter-spacing: 1px; }
+  .hero p.sub { margin: 0 auto 22px; max-width: 640px; opacity: .92; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .chip {
+    background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 15px;
+  }
+
+  /* ---------- 導覽列 ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav ul {
+    list-style: none; margin: 0 auto; padding: 8px 12px;
+    max-width: 1000px;
+    display: flex; gap: 6px; overflow-x: auto;
+  }
+  nav a {
+    display: block; white-space: nowrap; text-decoration: none;
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 15px; color: var(--ocean-dark); font-weight: 600;
+  }
+  nav a:hover, nav a:focus { background: var(--sky); }
+
+  /* ---------- 版面 ---------- */
+  main { max-width: 1000px; margin: 0 auto; padding: 8px 16px 60px; }
+  section { margin-top: 44px; }
+  h2 {
+    font-size: 26px; margin: 0 0 16px; color: var(--ocean-dark);
+    padding-left: 14px; border-left: 6px solid var(--coral);
+  }
+  h3 { font-size: 20px; margin: 24px 0 10px; color: var(--ocean); }
+  p { margin: 8px 0; }
+
+  .card {
+    background: var(--card); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 20px 22px; border: 1px solid var(--line);
+  }
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .grid .card h3 { margin-top: 0; font-size: 18px; }
+  .grid .card p { font-size: 15.5px; color: var(--muted); margin: 0; }
+
+  /* ---------- 提示框 ---------- */
+  .note {
+    border-radius: 12px; padding: 14px 18px; margin: 16px 0;
+    border-left: 6px solid; font-size: 16px;
+  }
+  .note.warn { background: #fff6e3; border-color: var(--gold); }
+  .note.tip  { background: #e9f7f1; border-color: var(--green); }
+  .note.info { background: var(--sky); border-color: var(--ocean); }
+  .note strong:first-child { display: inline-block; margin-right: 4px; }
+
+  /* ---------- 表格 ---------- */
+  .table-wrap { overflow-x: auto; margin: 12px 0; border-radius: 12px; border: 1px solid var(--line); background: #fff; }
+  table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 15.5px; }
+  th, td { padding: 11px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  th { background: var(--sky); color: var(--ocean-dark); white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  /* ---------- 住宿推薦卡 ---------- */
+  .pick {
+    background: linear-gradient(135deg, #fff, #fff7f4);
+    border: 2px solid var(--coral);
+  }
+  .badge {
+    display: inline-block; background: var(--coral); color: #fff;
+    font-size: 13px; font-weight: 700; padding: 2px 12px; border-radius: 999px; margin-bottom: 6px;
+  }
+  ul.plain { margin: 8px 0; padding-left: 22px; }
+  ul.plain li { margin: 4px 0; }
+  .pros li::marker { content: "👍  "; }
+  .cons li::marker { content: "⚠️  "; }
+
+  /* ---------- 每日行程 ---------- */
+  .day-head {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    background: linear-gradient(135deg, var(--ocean), #2a7fc0);
+    color: #fff; border-radius: var(--radius); padding: 18px 22px; margin-bottom: 16px;
+  }
+  .day-num {
+    background: #fff; color: var(--ocean-dark); font-weight: 800;
+    border-radius: 12px; padding: 6px 14px; font-size: 20px; white-space: nowrap;
+  }
+  .day-head h2 { color: #fff; border: none; padding: 0; margin: 0; font-size: 22px; }
+  .day-head small { display: block; opacity: .9; font-size: 15px; font-weight: 400; }
+
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before {
+    content: ""; position: absolute; left: 78px; top: 8px; bottom: 8px;
+    width: 3px; background: var(--line); border-radius: 2px;
+  }
+  .timeline li { display: flex; gap: 14px; margin-bottom: 14px; position: relative; }
+  .time {
+    flex: 0 0 56px; text-align: right; font-weight: 700; color: var(--ocean);
+    font-size: 14.5px; padding-top: 14px; line-height: 1.3;
+  }
+  .dot {
+    flex: 0 0 14px; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--coral); border: 3px solid #fff; box-shadow: 0 0 0 2px var(--coral);
+    margin-top: 18px; z-index: 1; margin-left: 2px;
+  }
+  .step {
+    flex: 1; background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 12px 16px; box-shadow: var(--shadow);
+  }
+  .step b { color: var(--ocean-dark); }
+  .step .how { display: block; color: var(--muted); font-size: 15px; margin-top: 4px; }
+  .step .how::before { content: "🚇 "; }
+  .step .sub { display: block; color: var(--muted); font-size: 15px; margin-top: 4px; }
+  .tag {
+    display: inline-block; font-size: 12.5px; font-weight: 700;
+    padding: 1px 10px; border-radius: 999px; margin-left: 6px; vertical-align: middle;
+  }
+  .tag.must { background: #ffe3de; color: #b53a28; }
+  .tag.free { background: #dcf3e9; color: #1d6a4f; }
+  .tag.opt  { background: #eef0f3; color: #4c5966; }
+  .highlight .step { border: 2px solid var(--gold); background: #fffdf5; }
+
+  details {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 10px 16px; margin: 12px 0;
+  }
+  summary { cursor: pointer; font-weight: 700; color: var(--ocean-dark); }
+
+  /* ---------- 打卡卡片 ---------- */
+  .spot h3 { margin: 0 0 4px; font-size: 17px; color: var(--ocean-dark); }
+  .spot .where { font-size: 14px; color: var(--coral); font-weight: 700; }
+  .spot p { font-size: 15px; }
+
+  /* ---------- 清單 ---------- */
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li { margin: 8px 0; }
+  .checklist label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
+  .checklist input { width: 22px; height: 22px; margin-top: 4px; accent-color: var(--green); flex: 0 0 auto; }
+  .checklist input:checked + span { text-decoration: line-through; color: var(--muted); }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 30px 16px 50px; }
+
+  /* ---------- 手機 ---------- */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .timeline::before { left: 10px; }
+    .timeline li { flex-wrap: wrap; gap: 6px; }
+    .time { flex: 1 1 100%; text-align: left; padding: 0 0 0 30px; order: 0; }
+    .dot { position: absolute; left: 4px; top: 4px; margin: 0; }
+    .step { flex: 1 1 100%; margin-left: 28px; }
+    h2 { font-size: 22px; }
+  }
+
+  /* ---------- 列印 ---------- */
+  @media print {
+    nav { display: none; }
+    body { background: #fff; font-size: 14px; }
+    .hero { padding: 24px; }
+    .card, .step, details { box-shadow: none; break-inside: avoid; }
+    section { break-inside: auto; }
+    .day-head { break-after: avoid; }
+    details { display: block; }
+    details > * { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>🎄 釜山 4 天 3 夜聖誕之旅</h1>
+  <p class="sub">12/24（四）~ 12/27（日）｜1 ~ 2 人｜住同一間不搬家｜悠閒看海 + 纜車 + 網美打卡</p>
+  <div class="chips">
+    <span class="chip">🌊 看海</span>
+    <span class="chip">🚠 兩種纜車／列車</span>
+    <span class="chip">📸 小紅書熱門景點</span>
+    <span class="chip">🎄 聖誕點燈</span>
+    <span class="chip">🚇 含交通方式</span>
+  </div>
+</header>
+
+<nav aria-label="章節導覽">
+  <ul>
+    <li><a href="#notes">先看重點</a></li>
+    <li><a href="#stay">住宿</a></li>
+    <li><a href="#transport">交通</a></li>
+    <li><a href="#day1">Day 1</a></li>
+    <li><a href="#day2">Day 2</a></li>
+    <li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li>
+    <li><a href="#photo">打卡清單</a></li>
+    <li><a href="#todo">行前準備</a></li>
+    <li><a href="#budget">預算</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ========== 重點 ========== -->
+<section id="notes">
+  <h2>先看這幾個重點</h2>
+  <div class="grid">
+    <div class="card"><h3>🥶 天氣很冷</h3><p>12 月約 0 ~ 10°C，海邊風大。帶防風外套、暖暖包、圍巾、手套。</p></div>
+    <div class="card"><h3>🌇 天黑得早</h3><p>日落約 17:15。夕陽和夜景行程都要抓早一點。</p></div>
+    <div class="card"><h3>🎟️ 一定要先訂</h3><p>海雲台「天空膠囊列車」熱門時段很快滿，請最先預約。</p></div>
+    <div class="card"><h3>🚠 不用預約</h3><p>松島海上纜車現場買票即可；海岸列車前一天訂通常還有位。</p></div>
+    <div class="card"><h3>🎅 聖誕節 12/25</h3><p>韓國國定假日，景點照開，但部分小店可能休息，出發前用 Naver Map 查營業時間。</p></div>
+    <div class="card"><h3>👥 週六 12/26</h3><p>南浦洞、海雲台人潮最多，熱門景點盡量早去。</p></div>
+  </div>
+
+  <div class="note warn">
+    <strong>⚠️ 入境提醒：</strong>我查到 K-ETA（韓國電子旅行許可）暫時免除期限延長到 2026/12/31，但搜尋結果多半是針對日本旅客。<b>台灣護照是否同樣適用，以及是否需要填 e-Arrival Card（電子入境卡），請出發前查韓國官方網站或外交部領事事務局。</b>
+  </div>
+  <div class="note info">
+    <strong>ℹ️ 資料說明：</strong>票價與營業時間多半參考 2025 ~ 2026 年公開資訊。<b>聖誕點燈活動的 2026 年確切日期我沒查到官方公告</b>，出發前請再確認。標示「（估）」的是估算值，不是官方數字。
+  </div>
+</section>
+
+<!-- ========== 住宿 ========== -->
+<section id="stay">
+  <h2>住宿區域建議</h2>
+  <p>景點分成「東邊（海雲台）」和「西邊（南浦洞、甘川、松島）」。釜山東西很長，南浦洞到海雲台單程約 50 ~ 60 分鐘（含轉乘），所以住哪裡很重要。</p>
+
+  <div class="card pick">
+    <span class="badge">⭐ 首推</span>
+    <h3 style="margin-top:0">廣安里（광안리 Gwangalli）</h3>
+    <ul class="plain pros">
+      <li>離海近，走路就到海邊，<b>廣安大橋夜景</b>是釜山經典畫面</li>
+      <li>咖啡廳、餐廳、酒吧多，晚上好逛</li>
+      <li>地鐵 2 號線：到海雲台約 15 分，到西面約 20 分</li>
+      <li>比海雲台便宜，聖誕期間人也沒那麼擠</li>
+    </ul>
+    <ul class="plain cons">
+      <li>去南浦洞／松島要轉乘，約 40 ~ 50 分鐘（我把西邊行程集中在同一天）</li>
+    </ul>
+  </div>
+
+  <h3>其他選擇</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>區域</th><th>優點</th><th>缺點</th><th>適合</th></tr></thead>
+      <tbody>
+        <tr><td><b>海雲台</b></td><td>海灘、聖誕點燈、藍線公園都在旁邊，吃喝玩樂完整</td><td>聖誕期間最貴、人最多；去南浦洞／甘川單程約 1 小時</td><td>想把東邊玩得很徹底</td></tr>
+        <tr><td><b>西面</b></td><td>地鐵 1、2 號線交會，去哪都方便；離機場輕軌近；住宿 CP 值高</td><td>沒有海景，晚上要搭車才看到海</td><td>預算優先、交通最省事</td></tr>
+        <tr><td><b>南浦洞</b></td><td>聖誕樹燈節、市場、甘川都近</td><td>離海雲台遠；看海氛圍較弱</td><td>老城區、市場愛好者</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note tip">
+    <strong>💡 選房小提醒</strong>
+    <ul class="plain">
+      <li>選離地鐵站<b>步行 5 分鐘內</b>的，冬天拖行李比較輕鬆</li>
+      <li>廣安里可優先看「面海／看得到廣安大橋」的房型，平安夜在房內就能看夜景</li>
+      <li>1 ~ 2 人可找有洗衣機、暖氣好的，冬季衣服厚，洗衣方便</li>
+      <li>聖誕檔期會先漲價，<b>建議早訂</b></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 交通 ========== -->
+<section id="transport">
+  <h2>交通怎麼搭</h2>
+
+  <h3>✈️ 從金海機場到市區</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>方式</th><th>時間</th><th>費用</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td><b>地鐵 + 輕軌</b><br><span class="tag free">推薦</span></td><td>到廣安里約 50 ~ 60 分（估）<br>到西面約 30 分<br>到海雲台約 60 分</td><td>約 ₩1,800 ~ 2,000（估）</td><td>機場站搭釜山金海輕軌，在「沙上站」轉 2 號線。時間穩定、不塞車</td></tr>
+        <tr><td><b>計程車</b></td><td>到西面約 40 分<br>到海雲台約 60 分</td><td>西面 ₩17,000 ~ 20,000<br>海雲台 ₩35,000 ~ 40,000</td><td>兩人分攤划算，行李多或晚到最省力。請搭黃牌合法計程車，並確認有跳表</td></tr>
+        <tr><td><b>機場利木津巴士</b></td><td>到西面約 45 分<br>到海雲台約 90 分</td><td>西面線 ₩7,500<br>海雲台線 ₩9,500</td><td>約 60 分鐘一班，要配合時間，班次以機場官網為準</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>🚇 在市區移動</h3>
+  <div class="grid">
+    <div class="card"><h3>💳 交通卡</h3><p>準備 <b>T-money</b> 或 <b>WOWPASS</b>，地鐵、公車、計程車都能刷。刷卡搭地鐵比付現金便宜 ₩100。</p></div>
+    <div class="card"><h3>🚉 地鐵費用</h3><p>每趟約 ₩1,600 ~ 1,800。1 日券 ₩6,000（只限地鐵），一天搭 4 趟以上才划算。本行程先不用買。</p></div>
+    <div class="card"><h3>📱 建議下載 App</h3><p>Naver Map／Kakao Map（導航）、SubwayKorea（看地鐵換乘）、Uber／Kakao T（叫車）、Papago（翻譯）。</p></div>
+  </div>
+  <div class="note tip">
+    <strong>🧭 只要記得這三個：</strong>
+    <ul class="plain">
+      <li><b>2 號線</b>：海雲台 ↔ 廣安里 ↔ 西面（本行程主要路線）</li>
+      <li><b>1 號線</b>：西面 ↔ 南浦洞 ↔ 土城（去甘川）</li>
+      <li><b>西面站</b>是 1、2 號線的轉乘站</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== Day 1 ========== -->
+<section id="day1">
+  <div class="day-head">
+    <span class="day-num">Day 1</span>
+    <h2>12/24（四）平安夜<small>抵達 → 廣安里海邊 → 海雲台點燈</small></h2>
+  </div>
+  <p>抵達時間還不確定，這天排得有彈性。中午前到就全部走；傍晚後才到，就只走「廣安里夜景」。</p>
+
+  <ol class="timeline">
+    <li><span class="time">抵達後</span><span class="dot"></span>
+      <div class="step"><b>機場 → 廣安里住宿</b>，寄放行李或入住
+        <span class="how">地鐵 + 輕軌，或搭計程車</span></div></li>
+    <li><span class="time">下午</span><span class="dot"></span>
+      <div class="step"><b>廣安里海邊散步</b>，找間海景咖啡廳坐著看海
+        <span class="sub">沿海岸線咖啡廳很多，走路就到</span></div></li>
+    <li><span class="time">17:15</span><span class="dot"></span>
+      <div class="step"><b>日落 + 廣安大橋亮燈</b>
+        <span class="sub">直接在沙灘中段看，角度最好</span></div></li>
+    <li><span class="time">18:30</span><span class="dot"></span>
+      <div class="step"><b>晚餐</b>：民樂生魚片市場吃海鮮，或吃<b>豬肉湯飯（돼지국밥）</b>暖身
+        <span class="sub">民樂距廣安里步行約 15 分鐘</span></div></li>
+    <li class="highlight"><span class="time">20:00</span><span class="dot"></span>
+      <div class="step"><b>🎄 海雲台點燈節</b>（海灘 + 舊站路一帶）
+        <span class="how">廣安里搭 2 號線到海雲台，約 15 分鐘</span>
+        <span class="sub">看巨大聖誕樹、燈光隧道。2025 年點燈時段是 18:00 ~ 23:00</span></div></li>
+    <li><span class="time">22:00</span><span class="dot"></span>
+      <div class="step"><b>回廣安里休息</b></div></li>
+  </ol>
+
+  <div class="note info"><strong>ℹ️</strong>2025 年海雲台點燈節是 11/29 ~ 1/18，<b>2026 年日期請出發前再確認</b>。想看南浦洞的聖誕樹也可以這晚改去（2025 年平安夜開到凌晨 1 點），但來回會比較累。</div>
+</section>
+
+<!-- ========== Day 2 ========== -->
+<section id="day2">
+  <div class="day-head">
+    <span class="day-num">Day 2</span>
+    <h2>12/25（五）聖誕節<small>海雲台看海 + 膠囊列車（本行程的看海重點）</small></h2>
+  </div>
+
+  <div class="note warn"><strong>⚠️ 先訂：</strong>「天空膠囊列車」一定要先線上預約（KKday／Klook／官網），約使用日前 1 個月開放，12/25 建議一開放就訂。</div>
+
+  <ol class="timeline">
+    <li><span class="time">09:00</span><span class="dot"></span>
+      <div class="step"><b>睡飽 + 廣安里早餐</b>（咖啡、吐司）
+        <span class="sub">聖誕節部分店家開得晚，先查營業時間</span></div></li>
+    <li><span class="time">10:00</span><span class="dot"></span>
+      <div class="step"><b>前往尾浦（미포）站</b>
+        <span class="how">2 號線到海雲台，再從海雲台海水浴場東側步行 15 ~ 20 分鐘；或搭計程車短程</span></div></li>
+    <li class="highlight"><span class="time">10:30</span><span class="dot"></span>
+      <div class="step"><b>🚠 天空膠囊列車</b>（尾浦 → 青沙浦，約 30 分鐘）<span class="tag must">需預約</span>
+        <span class="sub">沿海岸軌道慢慢行駛，可看海景與岩岸。這是小紅書超熱門打卡點</span></div></li>
+    <li><span class="time">11:15</span><span class="dot"></span>
+      <div class="step"><b>青沙浦踏石展望台</b>（다릿돌 전망대）
+        <span class="sub">從青沙浦站步行上去，拍海景與海岸線</span></div></li>
+    <li><span class="time">12:30</span><span class="dot"></span>
+      <div class="step"><b>午餐</b>：青沙浦／松亭附近吃海鮮麵、烤魚或海鮮鍋</div></li>
+    <li class="highlight"><span class="time">13:30</span><span class="dot"></span>
+      <div class="step"><b>🚃 海岸列車</b>（青沙浦 → 松亭站），逛<b>松亭海灘</b>，找間海景咖啡廳
+        <span class="sub">松亭有衝浪客與咖啡街，氣氛悠閒。列車尾浦到松亭約 25 分鐘</span></div></li>
+    <li><span class="time">15:00</span><span class="dot"></span>
+      <div class="step"><b>回尾浦，散步冬柏島（동백섬）</b>
+        <span class="sub">步道約 1 小時，有燈塔與 Nurimaru APEC House</span></div></li>
+    <li><span class="time">17:15</span><span class="dot"></span>
+      <div class="step"><b>🌇 冬柏島看日落</b>
+        <span class="sub">聖誕節人多，提早卡位</span></div></li>
+    <li class="highlight"><span class="time">18:00</span><span class="dot"></span>
+      <div class="step"><b>🎄 釜山電影殿堂聖誕村</b>（Busan Cinema Center）
+        <span class="sub">2025 年營業到 12/25（11:00 ~ 22:00），2026 年請再確認</span></div></li>
+    <li><span class="time">19:30</span><span class="dot"></span>
+      <div class="step"><b>晚餐</b>：新世界百貨 Centum City 餐廳，或海雲台烤牛排骨（소갈비）
+        <span class="sub">聖誕節晚上訂位難，可先用 Catchtable／Naver 訂位</span></div></li>
+    <li><span class="time">21:00</span><span class="dot"></span>
+      <div class="step"><b>新世界 Spa Land</b>（汗蒸幕 + 溫泉）<span class="tag opt">選配</span>
+        <span class="sub">冬天泡很舒服。票價約 ₩23,000（參考，請再確認）</span></div></li>
+    <li><span class="time">22:30</span><span class="dot"></span>
+      <div class="step"><b>回廣安里</b>
+        <span class="how">Centum City 搭 2 號線到廣安，約 15 分鐘</span></div></li>
+  </ol>
+
+  <div class="note info">
+    <strong>📋 票價與班次參考</strong>
+    <ul class="plain">
+      <li><b>天空膠囊</b>（整車價）：兩人座 ₩40,000、三人座 ₩45,000、四人座 ₩50,000。兩人座平均每人 ₩20,000</li>
+      <li><b>海岸列車</b>：單程／來回／一日券約 ₩8,000 / ₩12,000 / ₩16,000（請以官網為準），一日券可中途多站下車</li>
+      <li>海岸列車路線為尾浦到松亭共 7 站，首班約 9:30、末班約 20:30，隨季節調整</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== Day 3 ========== -->
+<section id="day3">
+  <div class="day-head">
+    <span class="day-num">Day 3</span>
+    <h2>12/26（六）老城區一日<small>甘川文化村 + 松島海上纜車 + 南浦洞夜景</small></h2>
+  </div>
+  <p>纜車在這一天。甘川、松島、南浦洞在同一片區，所以集中安排。</p>
+
+  <ol class="timeline">
+    <li><span class="time">08:30</span><span class="dot"></span>
+      <div class="step"><b>從廣安里出發</b>
+        <span class="how">2 號線到西面，轉 1 號線到「土城站」，約 50 分鐘</span></div></li>
+    <li class="highlight"><span class="time">09:30</span><span class="dot"></span>
+      <div class="step"><b>🌈 甘川文化村</b>：彩色房子、小王子雕像、巷弄壁畫
+        <span class="how">土城站 6 號出口，搭村莊巴士 1 / 1-1 / 2 號（以 Naver Map 為準），約 3 分鐘</span>
+        <span class="sub">可買蓋章地圖走一圈。早點去人比較少</span></div></li>
+    <li><span class="time">11:30</span><span class="dot"></span>
+      <div class="step"><b>午餐</b>：甘川附近，或札嘎其／南浦一帶吃<b>河豚湯（복국）</b>或海鮮（冬季當令）</div></li>
+    <li><span class="time">13:00</span><span class="dot"></span>
+      <div class="step"><b>前往松島海上纜車</b>
+        <span class="how">土城站附近搭計程車約 10 分鐘，約 ₩6,000 ~ 8,000（估）</span></div></li>
+    <li class="highlight"><span class="time">13:30</span><span class="dot"></span>
+      <div class="step"><b>🚠 松島海上纜車</b>（Bay Station ↔ Songdo Sky Park，單程約 10 分鐘）<span class="tag free">免預約</span>
+        <span class="sub">現場買票。可選透明地板的 Crystal Cruise，看海超有感</span></div></li>
+    <li><span class="time">14:00</span><span class="dot"></span>
+      <div class="step"><b>松島天空公園 + 龍宮雲橋</b>（용궁구름다리）、下到海邊步道
+        <span class="sub">下去容易，回程要爬階梯，腳力不好可只逛上層</span></div></li>
+    <li><span class="time">16:00</span><span class="dot"></span>
+      <div class="step"><b>回南浦洞</b>
+        <span class="how">搭計程車約 15 分鐘（估）</span></div></li>
+    <li><span class="time">16:30</span><span class="dot"></span>
+      <div class="step"><b>逛市場</b>：國際市場、富平罐頭市場、BIFF 廣場
+        <span class="sub">吃糖餅（씨앗호떡）、魚板、忠武紫菜飯捲</span></div></li>
+    <li><span class="time">17:15</span><span class="dot"></span>
+      <div class="step"><b>日落 / 夜景</b>：可選龍頭山公園與釜山塔<span class="tag opt">選配</span>
+        <span class="sub">釜山塔門票約 ₩12,000</span></div></li>
+    <li><span class="time">18:30</span><span class="dot"></span>
+      <div class="step"><b>晚餐</b>：南浦洞／札嘎其海鮮，或魚板、烤鰻魚
+        <span class="sub">週六要先訂位或避開尖峰</span></div></li>
+    <li class="highlight"><span class="time">19:30</span><span class="dot"></span>
+      <div class="step"><b>🎄 光復路聖誕樹燈節</b>
+        <span class="sub">2025 年開放 17:30 ~ 22:00。2026 年請再確認</span></div></li>
+    <li><span class="time">21:00</span><span class="dot"></span>
+      <div class="step"><b>回廣安里</b>
+        <span class="how">南浦 → 西面 → 廣安里，約 45 分鐘</span></div></li>
+  </ol>
+
+  <div class="note info">
+    <strong>📋 松島纜車資訊（2025 年公開資訊，請再確認）</strong>
+    <ul class="plain">
+      <li>來回票價：一般艙 Air Cruise 成人 ₩17,000；透明地板艙 Crystal Cruise 成人 ₩22,000</li>
+      <li>12 月營運時間約 09:00 ~ 20:00，最後售票為關閉前 30 分鐘</li>
+      <li>強風或天氣不佳會停駛，當天出發前先看官網運行公告</li>
+      <li>車廂內不能飲食；站內有寄物櫃、便利商店與咖啡廳</li>
+      <li>整體遊玩約 1.5 ~ 3 小時</li>
+    </ul>
+  </div>
+
+  <details>
+    <summary>🌧️ 下雨或強風的備案（點開看）</summary>
+    <ul class="plain">
+      <li>纜車停駛 → 改去<b>太宗台</b>（可搭遊園車）或<b>影島白淺灘文化村</b>看海</li>
+      <li>改去南浦洞室內商場、札嘎其市場、樂天百貨</li>
+    </ul>
+  </details>
+</section>
+
+<!-- ========== Day 4 ========== -->
+<section id="day4">
+  <div class="day-head">
+    <span class="day-num">Day 4</span>
+    <h2>12/27（日）緩衝與回程<small>只排輕量行程，隨時可收尾</small></h2>
+  </div>
+  <p>回程航班時間還不確定。國際線請提早 <b>2.5 ~ 3 小時</b>到機場。</p>
+
+  <ol class="timeline">
+    <li><span class="time">上午</span><span class="dot"></span>
+      <div class="step"><b>廣安里海邊早午餐</b>，再散一次步
+        <span class="sub">冬天早晨海邊很安靜，很適合拍照</span></div></li>
+    <li><span class="time">上午</span><span class="dot"></span>
+      <div class="step"><b>買伴手禮</b>：Olive Young（彩妝保養）、Lotte Mart、便利商店零食
+        <span class="sub">廣安里周邊都有</span></div></li>
+    <li><span class="time">視航班</span><span class="dot"></span>
+      <div class="step"><b>退房，前往機場</b>
+        <span class="how">地鐵 + 輕軌約 50 ~ 60 分鐘（估）；行李多可搭計程車</span></div></li>
+  </ol>
+
+  <div class="note tip">
+    <strong>✨ 如果下午才飛，可加碼一個：</strong>
+    <ul class="plain">
+      <li><b>全浦咖啡街</b>（전포 카페거리）：小紅書熱門咖啡街，在西面附近，從廣安里往機場的路上可順道繞過去（西面到機場約 30 分鐘）</li>
+      <li><b>海雲台市場</b>：吃海鮮、魚板、小吃</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 打卡 ========== -->
+<section id="photo">
+  <h2>小紅書／網美打卡清單</h2>
+  <div class="grid">
+    <div class="card spot"><span class="where">海雲台</span><h3>天空膠囊列車 <span class="tag must">需預約</span></h3><p>沿海岸軌道的經典照。白天到夕陽都漂亮。</p></div>
+    <div class="card spot"><span class="where">海雲台</span><h3>青沙浦踏石展望台</h3><p>視野開闊，可拍海岸線與岩岸。白天去。</p></div>
+    <div class="card spot"><span class="where">海雲台東</span><h3>松亭站與松亭海灘咖啡街</h3><p>復古小車站加海景咖啡廳。下午去。</p></div>
+    <div class="card spot"><span class="where">海雲台</span><h3>冬柏島與 Nurimaru</h3><p>海岸步道、燈塔。日落時拍。</p></div>
+    <div class="card spot"><span class="where">海雲台</span><h3>電影殿堂與聖誕村</h3><p>大屋頂燈光加聖誕氛圍。傍晚到晚上。</p></div>
+    <div class="card spot"><span class="where">廣安里</span><h3>廣安大橋夜景</h3><p>釜山經典夜景。日落後最美。</p></div>
+    <div class="card spot"><span class="where">老城區</span><h3>甘川文化村</h3><p>彩色房屋、小王子雕像。早上人少。</p></div>
+    <div class="card spot"><span class="where">松島</span><h3>海上纜車與龍宮雲橋</h3><p>透明地板纜車，空中看海。下午去。</p></div>
+    <div class="card spot"><span class="where">南浦洞</span><h3>光復路聖誕樹燈節</h3><p>聖誕拍照熱點。晚上去。</p></div>
+    <div class="card spot"><span class="where">西面</span><h3>全浦咖啡街 <span class="tag opt">備選</span></h3><p>第 4 天下午飛的話可去。</p></div>
+    <div class="card spot"><span class="where">影島</span><h3>白淺灘文化村 <span class="tag opt">備選</span></h3><p>雨天或強風時的替代看海地點。</p></div>
+  </div>
+</section>
+
+<!-- ========== 行前準備 ========== -->
+<section id="todo">
+  <h2>行前準備清單</h2>
+  <div class="card">
+    <p style="color:var(--muted);font-size:15px">可以直接點選打勾（重新整理頁面會清除）。</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox"><span><b>住宿</b>：聖誕檔期會漲價，越早越好</span></label></li>
+      <li><label><input type="checkbox"><span><b>天空膠囊列車</b>：使用日前約 1 個月開放預約，12/25 的時段一開放就訂</span></label></li>
+      <li><label><input type="checkbox"><span>海岸列車（前一天訂通常還有位，也可先訂）</span></label></li>
+      <li><label><input type="checkbox"><span>松島纜車（KKday／Klook 可先買，比現場約便宜 5%，也可現場買）</span></label></li>
+      <li><label><input type="checkbox"><span>入境文件：K-ETA 是否免除、e-Arrival Card 是否需填</span></label></li>
+      <li><label><input type="checkbox"><span>交通卡（T-money／WOWPASS）與網路（eSIM 或 SIM 卡）</span></label></li>
+      <li><label><input type="checkbox"><span>下載 App：Naver Map、Kakao Map、Uber／Kakao T、SubwayKorea、Papago</span></label></li>
+      <li><label><input type="checkbox"><span>12/24、12/25 晚餐訂位（熱門餐廳容易客滿）</span></label></li>
+      <li><label><input type="checkbox"><span>保暖裝備：防風外套、暖暖包、手套、毛帽</span></label></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 預算 ========== -->
+<section id="budget">
+  <h2>預算參考（不含機票、住宿）</h2>
+  <p>以下為 1 位成人的粗略估算。</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>項目</th><th>參考金額</th></tr></thead>
+      <tbody>
+        <tr><td>天空膠囊（兩人座 ₩40,000 ÷ 2 人）</td><td>約 ₩20,000 / 人</td></tr>
+        <tr><td>海岸列車（1 日券）</td><td>約 ₩16,000</td></tr>
+        <tr><td>松島纜車（Air Cruise 來回；Crystal ₩22,000）</td><td>₩17,000</td></tr>
+        <tr><td>龍宮雲橋</td><td>約 ₩1,000</td></tr>
+        <tr><td>新世界 Spa Land（選配）</td><td>約 ₩23,000</td></tr>
+        <tr><td>地鐵與計程車（4 天）</td><td>約 ₩40,000 ~ 70,000（估）</td></tr>
+        <tr><td>餐飲（三餐 + 咖啡／小吃）</td><td>約 ₩40,000 ~ 60,000 / 天（估）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========== 來源 ========== -->
+<section id="sources">
+  <h2>資料來源與不確定之處</h2>
+  <div class="card">
+    <p><b>參考來源：</b></p>
+    <ul class="plain">
+      <li><a href="https://zizitabi.com/entry/matsushimacablecar-busan" target="_blank" rel="noopener">松島海上纜車（zizitabi，2025 年 4 月資訊）</a></li>
+      <li><a href="https://www.callingtaiwan.com.tw/haeundae-beach-train/" target="_blank" rel="noopener">釜山海岸列車／膠囊列車說明（CallingTaiwan）</a></li>
+      <li><a href="https://tantoonni-log.com/busan-access-guide/" target="_blank" rel="noopener">金海機場到市區交通整理（tantoonni-log，2026）</a></li>
+      <li><a href="https://www.koreantopik.com/2025/12/4-must-visit-busan-winter-festivals.html" target="_blank" rel="noopener">釜山冬季燈節整理（Korean Topik，2025 年版）</a></li>
+      <li><a href="https://japanese.visitkorea.or.kr/svc/contents/contentsView.do?vcontsId=251922" target="_blank" rel="noopener">K-ETA 免除延長說明（韓國觀光公社）</a></li>
+    </ul>
+    <p><b>我沒能查證、需要你出發前確認的事：</b></p>
+    <ol class="plain">
+      <li>2026 年聖誕點燈、聖誕村、聖誕遊行的確切日期與時間（以上多為 2025 年資料）</li>
+      <li>各景點 12/24 ~ 12/27 當天的實際營業時間與票價</li>
+      <li>台灣護照的 K-ETA／e-Arrival Card 要求</li>
+      <li>標示「（估）」的交通時間與計程車費用</li>
+      <li>餐廳與咖啡廳我只列類型、沒指定店名，因為小店常搬遷或歇業。建議出發前用 Naver Map 或小紅書搜尋「廣安里 咖啡」「松亭 咖啡」「甘川 餐廳」，挑最近評價好的</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>祝旅途愉快 🎄 內容根據網路資料改寫整理，出發前請再次確認最新資訊。</footer>
+
+</body>
+</html>
